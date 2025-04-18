@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Now</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main>
+      <section id="section1">
+        <h1>
+          <%= locals.weatherData ? `Weather Now: ${weatherData.name},
+          ${weatherData.sys.country}` : `Weather Now` %>
+        </h1>
+
+        <form action="/" method="post">
+          <input
+            type="text"
+            name="city-and-country"
+            list="cities-and-countries-datalist"
+            placeholder="Search City"
+            autofocus
+          />
+
+          <datalist id="cities-and-countries-datalist">
+            <% citiesAndCountries.forEach(obj => { %> >
+            <option value="<%= obj.city %>, <%= obj.country %>"></option>
+            <% }) %>
+          </datalist>
+
+          <button type="submit">Enter</button>
+        </form>
+      </section>
+
+      <% if (locals.weatherData) { %>
+      <section id="section2">
+        <div>
+          <article class="weather-card thick-border">
+            <h2>Weather</h2>
+            <img
+              src="https://openweathermap.org/img/wn/<%= weatherData.weather[0].icon %>@2x.png"
+              alt="weather icon"
+            />
+            <p><%= weatherData.weather[0].main %></p>
+          </article>
+
+          <article class="thick-border">
+            <h2>Temperature</h2>
+            <p><%= Math.trunc(weatherData.main.temp) %> &deg;C</p>
+            <h2>Feels Like</h2>
+            <p><%= Math.trunc(weatherData.main.feels_like) %> &deg;C</p>
+          </article>
+
+          <article>
+            <h2>Clouds</h2>
+            <p><%= weatherData.clouds.all %> %</p>
+          </article>
+        </div>
+
+        <div>
+          <article>
+            <h2>Humidity</h2>
+            <p><%= weatherData.main.humidity %> %</p>
+          </article>
+
+          <article>
+            <h2>Precipitation</h2>
+            <p><%= weatherData.rain ? weatherData.rain['1h'] : 0 %> mm/h</p>
+          </article>
+
+          <article>
+            <h2>Wind Speed</h2>
+            <p><%= weatherData.wind.speed %> m/s</p>
+          </article>
+        </div>
+      </section>
+      <% } %>
+    </main>
+  </body>
+</html>

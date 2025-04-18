@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-family: 'Inter', sans-serif;
+  --font-size: 25px;
+  --h1-font-weight: 500;
+  --h2-font-weight: 500;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  background-image: linear-gradient(
+    #50a0bf,
+    #89c2d9,
+    #f2b680,
+    #f2c6ac,
+    #f2a2a2
+  );
+}
+
+main {
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/* section 1 */
+h1 {
+  padding-bottom: 10px;
+  font-weight: var(--h1-font-weight);
+  text-align: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+input,
+button {
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background-color: white;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+button {
+  cursor: pointer;
+}
+
+/* section 2 */
+section#section2 {
+  min-height: 425px;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+article {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+article.weather-card {
+  gap: 0;
+}
+
+article.thick-border {
+  border: 3px solid black;
+}
+
+h2 {
+  font-size: var(--font-size);
+  font-weight: var(--h2-font-weight);
+}
+
+@media (max-width: 370px) {
+  input {
+    width: 100%;
+  }
+}
