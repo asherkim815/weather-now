@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import express from 'express';
-import axios from 'axios';
 import openWeatherMajorCities from './public/OpenWeatherMajorCities.json' with { type: 'json' };
 
 const env = process.env;
@@ -10,7 +9,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 const citiesAndCountries = openWeatherMajorCities.map((obj) => {
-  return {city: obj.name, country: obj.country}
+  return { city: obj.name, country: obj.country };
 });
 
 app.get('/', async (req, res) => {
@@ -19,25 +18,27 @@ app.get('/', async (req, res) => {
   });
 });
 
-app.post('/', async (req, res) => {  
+app.post('/', async (req, res) => {
   try {
     const reqBody = req.body['city-and-country'].split(', ');
     const reqCity = reqBody[0];
     const reqCountry = reqBody[1];
     const unit = 'metric';
     const apiKey = env.OPENWEATHERMAP_API_KEY;
-    const apiRes = await axios.post(
-      `https://api.openweathermap.org/data/2.5/weather?q=${reqCity},${reqCountry}&units=${unit}&appid=${apiKey}`
-    ); 
-    const weatherData = apiRes.data;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${reqCity},${reqCountry}&units=${unit}&appid=${apiKey}`;
 
-    console.log(weatherData)
+    const apiRes = await fetch(url);
+    if (!apiRes.ok) {
+      throw new Error('wrong request');
+    }
+    const apiBody = await apiRes.json();
 
     res.render('index', {
-      citiesAndCountries: citiesAndCountries,      
-      weatherData: weatherData,
+      citiesAndCountries: citiesAndCountries,
+      weatherData: apiBody,
     });
   } catch (error) {
+    console.error(error);
     res.redirect('/');
   }
 });
