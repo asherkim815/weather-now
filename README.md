@@ -1,6 +1,6 @@
 # Weather Now (날씨 지금)
 
-## Screenshots
+## Screenshots (스크린샷)
 
 ![weather now screenshot #1](screenshots/weather-now-screenshot1.jpg)
 ![weather now screenshot #2](screenshots/weather-now-screenshot2.jpg)
